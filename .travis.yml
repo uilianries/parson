@@ -3,8 +3,6 @@ language: cpp
 matrix:
   include:
     - os: linux
-      dist: trusty
-      sudo: true
       compiler: gcc
       addons:
        apt:
@@ -12,6 +10,16 @@ matrix:
            - gcc-4.8
            - g++-4.8
            - cmake
+
+   - os: linux
+     compiler: gcc
+     if: tag IS present
+     addons:
+      apt:
+        packages:
+          - gcc-6
+          - g++-6
+          - cmake
 script:
      - cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON .
      - cmake --build .
